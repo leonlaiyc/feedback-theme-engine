@@ -1,0 +1,14 @@
+# Phase 0 — data acquisition and cleaning
+datasets==2.20.0          # HuggingFace datasets (streaming mode avoids full download)
+huggingface-hub==0.23.4   # required by datasets
+pandas==2.2.2             # dataframe ops, parquet I/O
+pyarrow==16.1.0           # parquet backend for pandas
+langdetect==1.0.9         # rule-based language detection (fast, no model download)
+tqdm==4.66.4              # progress bars during streaming pull
+
+# Phase 1+ (commented out until needed — don't install what you don't use yet)
+# sentence-transformers==3.0.1
+# scikit-learn==1.5.0
+# umap-learn==0.5.6
+# hdbscan==0.8.38
+# openai==1.35.0
