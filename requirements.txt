@@ -6,8 +6,17 @@ pyarrow==16.1.0           # parquet backend for pandas
 langdetect==1.0.9         # rule-based language detection (fast, no model download)
 tqdm==4.66.4              # progress bars during streaming pull
 
-# Phase 1+ (commented out until needed — don't install what you don't use yet)
-# sentence-transformers==3.0.1
+# Phase 1 — sentence embeddings
+sentence-transformers==3.0.1      # provides SentenceTransformer wrapper + all-MiniLM-L6-v2
+# Install torch with the CPU-only wheel to avoid the CUDA DLL issue on Windows:
+#   pip install torch==2.3.1+cpu --index-url https://download.pytorch.org/whl/cpu
+# Plain `pip install torch==2.3.1` pulls a CUDA-enabled build that fails on machines
+# without the CUDA runtime. The +cpu suffix is Windows-specific; on Mac/Linux the
+# default wheel is CPU-only and does not need the extra index.
+torch==2.3.1                      # CPU-only; see install note above
+numpy==1.26.4                     # array storage for embeddings
+
+# Phase 2+ (commented out until needed — don't install what you don't use yet)
 # scikit-learn==1.5.0
 # umap-learn==0.5.6
 # hdbscan==0.8.38
