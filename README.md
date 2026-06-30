@@ -47,11 +47,11 @@ remain traceable to review evidence.
 
 ## Current Status
 
-Phase 2 is complete. The repository includes local-only ingestion, schema
-normalization, validation summaries, deterministic sampling, and a local
-sentence embedding workflow for prepared review samples.
+Phase 3 is complete. The repository includes local-only ingestion, schema
+normalization, deterministic sampling, local sentence embeddings, and UMAP +
+HDBSCAN candidate theme discovery.
 
-Phase 3 is next: UMAP and HDBSCAN theme discovery.
+Phase 4 is next: statistical signal analysis for exploratory prioritization.
 
 ## Phase 1 Data Ingestion
 
@@ -117,6 +117,33 @@ UMAP, HDBSCAN, clustering, statistical tests, or LLM labeling.
 
 TF-IDF or c-TF-IDF remains useful in later phases for explainability and cluster
 keyword representation, not as the main semantic clustering method.
+
+## Phase 3 Theme Discovery
+
+Phase 3 applies UMAP to reduce high-dimensional sentence embeddings before
+clustering. HDBSCAN then discovers dense groups of semantically similar reviews
+and marks low-density points with label `-1` as noise.
+
+Cluster labels are initial candidate themes. They are not final business
+conclusions, and Phase 3 does not perform statistical significance testing,
+rating association analysis, or LLM labeling.
+
+The workflow keeps each cluster traceable to review IDs and source review text.
+It also produces deterministic representative examples, cluster diagnostics, and
+TF-IDF keyword representations for explainability.
+
+To run local candidate theme discovery after Phase 2 embedding generation:
+
+```powershell
+py -3 scripts/discover_themes.py `
+  --reviews-input data/processed/reviews_sample.parquet `
+  --ids-input data/processed/embeddings/reviews_sample_ids.json `
+  --embeddings-input data/processed/embeddings/reviews_sample_embeddings.npy `
+  --output-dir data/processed/themes
+```
+
+Generated theme outputs are written under ignored local paths such as
+`data/processed/themes/` and must not be committed.
 
 ## Data Policy Summary
 

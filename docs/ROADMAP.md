@@ -89,6 +89,8 @@ Exit criteria:
 
 ## Phase 3: UMAP + HDBSCAN Theme Discovery
 
+Status: complete.
+
 Goal: Discover semantic feedback themes using dimensionality reduction and
 density-based clustering.
 
@@ -97,20 +99,29 @@ Deliverables:
 - UMAP projection module.
 - HDBSCAN clustering module.
 - Cluster diagnostics.
-- Noise handling strategy.
+- Noise handling strategy for HDBSCAN label `-1`.
+- Representative review examples per non-noise cluster.
+- TF-IDF keyword extraction for cluster representation and explainability.
+- CLI script for local-only theme discovery from Phase 2 artifacts.
 
 Interview defendable:
 
 - Why UMAP is used before clustering.
 - Why HDBSCAN is appropriate for unknown, uneven theme shapes.
 - How outliers and noise are interpreted.
+- Why TF-IDF keywords explain clusters but do not drive semantic clustering.
 
 Exit criteria:
 
 - Toy or local data can produce clusters.
 - Cluster outputs include evidence examples.
+- Generated UMAP and cluster outputs are ignored local artifacts.
+- Phase 3 does not implement statistical tests, rating association analysis, or
+  LLM labeling.
 
 ## Phase 4: Statistical Signal Layer
+
+Status: next.
 
 Goal: Quantify which themes matter and how they relate to rating outcomes.
 

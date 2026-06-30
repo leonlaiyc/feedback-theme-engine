@@ -76,7 +76,9 @@ produce business conclusions by themselves.
 UMAP is planned to project high-dimensional embeddings into a lower-dimensional
 space that is more suitable for density-based clustering and diagnostics.
 
-Not implemented in Phase 2.
+Phase 3 applies UMAP to local sentence embeddings before clustering. The reduced
+coordinates are intermediate local artifacts and should not be treated as
+business findings by themselves.
 
 ### HDBSCAN Clustering
 
@@ -84,13 +86,19 @@ HDBSCAN is planned to discover dense semantic groups without requiring a fixed
 number of clusters. It can also identify noise points that do not fit a strong
 theme.
 
-Not implemented in Phase 2.
+Phase 3 uses HDBSCAN labels as initial candidate theme IDs. Label `-1` is kept
+as noise or outlier reviews and excluded from representative-review and keyword
+summaries.
 
 ### Theme Representation
 
 Theme representation combines cluster examples, keywords, and summary
 statistics. TF-IDF or c-TF-IDF may be used here to explain clusters and surface
 distinctive terms.
+
+Phase 3 provides a first representation layer with cluster assignments,
+diagnostics, deterministic representative reviews, and TF-IDF keywords. These
+outputs remain traceable to review IDs and source review text.
 
 ### Statistical Signal Layer
 
@@ -99,7 +107,7 @@ size, confidence intervals, and exploratory uncertainty. This layer helps
 separate frequent themes from themes that are meaningfully associated with
 customer outcomes.
 
-Not implemented in Phase 2.
+Not implemented in Phase 3.
 
 ### LLM Labeling
 
@@ -107,7 +115,7 @@ LLMs are planned for cluster labels, concise summaries, and business-readable
 insight generation. They should operate on curated cluster evidence and should
 not replace embedding-based discovery or statistical analysis.
 
-Not implemented in Phase 2.
+Not implemented in Phase 3.
 
 ### Evidence-Backed Insight Report
 

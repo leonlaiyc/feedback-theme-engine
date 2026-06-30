@@ -60,6 +60,17 @@ The default embedding output directory is `data/processed/embeddings/`, which is
 covered by the repository data ignore rules. Phase 2 does not require paid APIs,
 external API keys, clustering, statistical tests, or LLM labeling.
 
+## Theme Discovery Artifacts
+
+Phase 3 generates local UMAP, HDBSCAN, cluster assignment, representative review,
+diagnostic, and keyword outputs from local embeddings and review text. These
+outputs are derived from review data and must not be committed.
+
+The default theme output directory is `data/processed/themes/`, which is covered
+by the repository data ignore rules. Phase 3 does not perform statistical
+significance testing, rating association analysis, Wilson confidence intervals,
+LLM labeling, or LLM summarization.
+
 ## Review Before Commit
 
 Before committing, check git status and staged files for data or secrets. If

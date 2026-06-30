@@ -37,6 +37,7 @@ Planned outputs:
 - Cleaned review text.
 - Embedding representations.
 - Discovered theme clusters.
+- Cluster diagnostics and representative review examples.
 - Theme-level keyword and example evidence.
 - Theme prevalence and rating association statistics.
 - LLM-assisted theme labels and summaries.
