@@ -25,7 +25,8 @@ data locally from user-provided raw data.
 
 ## Environment Files
 
-Do not add `.env` in Phase 0. A `.env.example` may be added later only if it is useful and contains no real secrets.
+Do not add `.env` in Phase 0. A `.env.example` may be added later only if it is
+useful and contains no real secrets.
 
 ## Dataset Acquisition
 
@@ -50,4 +51,5 @@ LLM-generated labels, or business conclusions.
 
 ## Review Before Commit
 
-Before committing, check git status and staged files for data or secrets. If there is any doubt, do not commit the file.
+Before committing, check git status and staged files for data or secrets. If
+there is any doubt, do not commit the file.

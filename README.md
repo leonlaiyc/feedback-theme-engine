@@ -1,17 +1,16 @@
 # Customer Feedback Theme Engine
 
-An embedding-first analytics framework for discovering customer feedback themes and turning them into evidence-backed product insights.
+An embedding-first analytics framework for discovering customer feedback themes
+and turning them into evidence-backed product insights.
 
 ## Why This Project Exists
 
 Product reviews, support tickets, and survey comments often contain the clearest
 signals about customer needs, frustrations, and purchase drivers.
 
-The hard part is not summarizing comments one by one. The hard part is building
-a defensible workflow that groups semantically similar feedback, quantifies
-which themes matter, and keeps every conclusion tied to source evidence.
-
-This project demonstrates a practical approach to customer feedback analytics for portfolio and interview settings.
+This project turns unstructured feedback into structured, evidence-backed themes
+that can be reviewed, measured, and explained. It is built as a portfolio-ready
+analytics engineering project for customer feedback analysis.
 
 ## What This Project Demonstrates
 
@@ -20,9 +19,12 @@ This project demonstrates a practical approach to customer feedback analytics fo
 - Safe local ingestion for a public review dataset subset.
 - Sentence embeddings for semantic representation.
 - Dimensionality reduction and density-based clustering for theme discovery.
-- TF-IDF or c-TF-IDF as explainability and keyword representation, not the main semantic method.
-- Statistical signal analysis for prevalence, rating association, effect size, and uncertainty.
-- LLM-assisted labeling and business-readable summaries, with source-review traceability.
+- TF-IDF or c-TF-IDF as explainability and keyword representation, not the main
+  semantic method.
+- Statistical signal analysis for prevalence, rating association, effect size,
+  and uncertainty.
+- LLM-assisted labeling and business-readable summaries, with source-review
+  traceability.
 
 ## Methodology Overview
 
@@ -34,15 +36,24 @@ Each cluster is represented with keywords and examples, evaluated through
 statistical signals, and later labeled with LLM assistance. Final insights should
 remain traceable to review evidence.
 
+## Planned Roadmap
+
+- Phase 1: Data ingestion and review schema.
+- Phase 2: Sentence embeddings and semantic representation.
+- Phase 3: UMAP and HDBSCAN theme discovery.
+- Phase 4: Statistical signal layer.
+- Phase 5: LLM-assisted labeling and insight generation.
+- Phase 6: Portfolio packaging.
+
 ## Current Status
 
-Phase 1 is complete. The repository now includes local-only ingestion, schema
+Phase 1.1 is complete. The repository includes local-only ingestion, schema
 normalization, validation summaries, deterministic sampling, and a lightweight
 preparation script for a small Amazon Reviews 2023 category sample.
 
 Phase 2 is next: sentence embeddings and semantic representation.
 
-## Phase 1: Data Ingestion
+## Phase 1 Data Ingestion
 
 Phase 1 uses the public research dataset
 `McAuley-Lab/Amazon-Reviews-2023` for local experimentation. The starting subset
@@ -60,7 +71,11 @@ ignored data paths such as `data/processed/`.
 To prepare a small local sample after installing dependencies:
 
 ```powershell
-py -3 scripts/prepare_reviews.py --category raw_review_All_Beauty --sample-size 5000 --seed 42 --output data/processed/reviews_sample.parquet
+py -3 scripts/prepare_reviews.py `
+  --category raw_review_All_Beauty `
+  --sample-size 5000 `
+  --seed 42 `
+  --output data/processed/reviews_sample.parquet
 ```
 
 Some Hugging Face datasets may require remote dataset loading code. This project
@@ -78,15 +93,6 @@ If the raw dataset does not provide `review_id`, the ingestion code creates a
 deterministic generated ID from stable row fields. Missing optional fields are
 retained as nullable values so downstream validation can report data quality
 honestly.
-
-## Planned Roadmap
-
-- Phase 1: Data ingestion and review schema.
-- Phase 2: Sentence embeddings and semantic representation.
-- Phase 3: UMAP and HDBSCAN theme discovery.
-- Phase 4: Statistical signal layer.
-- Phase 5: LLM-assisted labeling and insight generation.
-- Phase 6: Portfolio packaging.
 
 ## Data Policy Summary
 

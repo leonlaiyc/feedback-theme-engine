@@ -106,12 +106,16 @@ Not implemented in Phase 1.
 
 ### Evidence-Backed Insight Report
 
-Final outputs should connect each insight to source review examples, theme statistics, and documented limitations.
+Final outputs should connect each insight to source review examples, theme
+statistics, and documented limitations.
 
 ## Method Roles
 
 - Embedding model role: provide semantic representations of review text.
-- Clustering algorithm role: discover recurring customer themes from embedding geometry.
+- Clustering algorithm role: discover recurring customer themes from embedding
+  geometry.
 - TF-IDF / c-TF-IDF role: support keyword representation and explainability.
-- Statistical layer role: quantify prevalence, association, effect size, and uncertainty.
-- LLM role: improve readability through labeling and summarization from evidence.
+- Statistical layer role: quantify prevalence, association, effect size, and
+  uncertainty.
+- LLM role: improve readability through labeling and summarization from
+  evidence.

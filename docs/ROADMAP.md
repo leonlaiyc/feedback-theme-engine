@@ -2,11 +2,13 @@
 
 ## Phase 0: Project Foundation
 
-Goal: Establish repository structure, documentation, safety policies, minimal Python skeleton, and tests.
+Goal: Establish repository structure, documentation, safety policies, minimal
+Python skeleton, and tests.
 
 Deliverables:
 
-- README, project spec, roadmap, architecture, data policy, and portfolio positioning docs.
+- README, project spec, roadmap, architecture, data policy, and portfolio
+  positioning docs.
 - Repo-scoped Codex skills.
 - Minimal package skeleton.
 - Basic schema and text-cleaning tests.
@@ -26,7 +28,8 @@ Exit criteria:
 
 Status: complete.
 
-Goal: Define safe ingestion patterns and validate review data without committing raw datasets.
+Goal: Define safe ingestion patterns and validate review data without committing
+raw datasets.
 
 Deliverables:
 
@@ -34,7 +37,8 @@ Deliverables:
 - Starting category: `raw_review_All_Beauty`.
 - Explicit `trust_remote_code` opt-in for Hugging Face dataset loading.
 - Normalized review schema with review text and rating outcome.
-- Required-column, rating-range, empty-text, duplicate-ID, and distribution validation.
+- Required-column, rating-range, empty-text, duplicate-ID, and distribution
+  validation.
 - Deterministic sampling with optional minimum text length.
 - Toy tests only; no real dataset fixtures in git.
 - Clear separation of raw and processed ignored paths.
@@ -50,7 +54,8 @@ Exit criteria:
 - Ingestion can prepare a local sample from a user-accessible dataset source.
 - Validation errors are clear and tested with synthetic data.
 - No raw or processed real review files are tracked.
-- Phase 1 does not implement embeddings, clustering, statistical tests, or LLM labeling.
+- Phase 1 does not implement embeddings, clustering, statistical tests, or LLM
+  labeling.
 
 ## Phase 2: Sentence Embeddings and Semantic Representation
 
@@ -77,7 +82,8 @@ Exit criteria:
 
 ## Phase 3: UMAP + HDBSCAN Theme Discovery
 
-Goal: Discover semantic feedback themes using dimensionality reduction and density-based clustering.
+Goal: Discover semantic feedback themes using dimensionality reduction and
+density-based clustering.
 
 Deliverables:
 
@@ -122,7 +128,8 @@ Exit criteria:
 
 ## Phase 5: LLM-Assisted Labeling and Insight Generation
 
-Goal: Use LLMs to label clusters and generate readable insights while preserving evidence traceability.
+Goal: Use LLMs to label clusters and generate readable insights while preserving
+evidence traceability.
 
 Deliverables:
 

@@ -2,17 +2,24 @@
 
 ## Problem Statement
 
-Customer feedback is often stored as unstructured text, making it difficult to identify recurring product themes, quantify their importance, and connect qualitative evidence to measurable customer outcomes such as ratings.
+Customer feedback is often stored as unstructured text, making it difficult to
+identify recurring product themes, quantify their importance, and connect
+qualitative evidence to measurable customer outcomes such as ratings.
 
-This project defines a defensible workflow for transforming product reviews into structured, evidence-backed customer themes and decision-ready insights.
+This project defines a defensible workflow for transforming product reviews into
+structured, evidence-backed customer themes and decision-ready insights.
 
 ## Target User
 
-The target user is an analytics, product, or data science stakeholder who needs to understand what customers are repeatedly saying, how those themes relate to rating outcomes, and which themes deserve attention.
+The target user is an analytics, product, or data science stakeholder who needs
+to understand what customers are repeatedly saying, how those themes relate to
+rating outcomes, and which themes deserve attention.
 
 ## Portfolio Goal
 
-The portfolio goal is to demonstrate applied analytics engineering, customer analytics thinking, semantic NLP methods, statistical signal interpretation, and responsible LLM usage in one coherent project.
+The portfolio goal is to demonstrate applied analytics engineering, customer
+analytics thinking, semantic NLP methods, statistical signal interpretation, and
+responsible LLM usage in one coherent project.
 
 ## Inputs and Outputs
 
@@ -44,7 +51,8 @@ Planned outputs:
 5. Discover dense semantic groups with HDBSCAN.
 6. Represent themes with keywords, examples, and source evidence.
 7. Quantify theme prevalence, rating association, effect size, and uncertainty.
-8. Use LLMs only for cluster labeling, theme summaries, and readable insight generation.
+8. Use LLMs only for cluster labeling, theme summaries, and readable insight
+   generation.
 9. Keep final insights traceable to source reviews.
 
 ## Non-Goals
@@ -67,9 +75,10 @@ Planned outputs:
 ## Interview Defend Points
 
 - Why embeddings are used for semantic representation.
-- Why TF-IDF or c-TF-IDF is used for representation and explainability rather than primary discovery.
+- Why TF-IDF or c-TF-IDF is used for representation and explainability rather
+  than primary discovery.
 - Why density-based clustering is appropriate for uneven theme sizes and noise.
 - How theme prevalence and rating association are quantified.
 - How uncertainty and exploratory limitations are communicated.
-- Why LLMs are restricted to labeling and summarization rather than replacing the pipeline.
-
+- Why LLMs are restricted to labeling and summarization rather than replacing
+  the pipeline.

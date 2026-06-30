@@ -1,6 +1,8 @@
 # Repository Instructions for Codex
 
-This repository is a portfolio-grade analytics engineering project for turning unstructured customer feedback into structured, evidence-backed themes and business insights.
+This repository is a portfolio-grade analytics engineering project for turning
+unstructured customer feedback into structured, evidence-backed themes and
+business insights.
 
 ## Working Principles
 
@@ -36,4 +38,3 @@ Every phase should end with:
 - Git status.
 - Commit hash.
 - Any skipped steps or blockers.
-
