@@ -59,26 +59,33 @@ Exit criteria:
 
 ## Phase 2: Sentence Embeddings and Semantic Representation
 
-Status: next.
+Status: complete.
 
 Goal: Represent review text with sentence embeddings.
 
 Deliverables:
 
-- Embedding interface.
-- Local model configuration.
-- Embedding artifact policy.
-- Small smoke tests or toy examples.
+- Embedding interface using `sentence-transformers`.
+- Local default model: `sentence-transformers/all-MiniLM-L6-v2`.
+- CLI script for embedding a prepared local Phase 1 sample.
+- Embedding artifact policy for ignored local `.npy` and ID files.
+- Similarity sanity helper for toy examples.
+- Tests with fake models only; no model downloads required.
 
 Interview defendable:
 
-- Why sentence embeddings are better suited than bag-of-words for semantic grouping.
+- Why sentence embeddings are better suited than bag-of-words for semantic
+  grouping.
 - How embedding artifacts are handled safely.
+- Why embeddings are a representation layer rather than business conclusions.
+- Why TF-IDF or c-TF-IDF remains useful later for explainability.
 
 Exit criteria:
 
 - Toy reviews can be embedded locally.
 - No large embedding artifacts are committed.
+- Phase 2 does not implement UMAP, HDBSCAN, clustering, statistical tests, or
+  LLM labeling.
 
 ## Phase 3: UMAP + HDBSCAN Theme Discovery
 

@@ -64,14 +64,19 @@ The embedding model converts review text into dense semantic vectors. These
 vectors are the primary representation for discovering themes because they
 capture similarity beyond exact keyword overlap.
 
-Not implemented in Phase 1.
+Phase 2 uses `sentence-transformers/all-MiniLM-L6-v2` as the default local
+open-source model. Embeddings are generated from prepared review text and saved
+as ignored local artifacts under `data/processed/embeddings/`.
+
+Embeddings support later semantic clustering and diagnostics. They do not
+produce business conclusions by themselves.
 
 ### Dimensionality Reduction
 
 UMAP is planned to project high-dimensional embeddings into a lower-dimensional
 space that is more suitable for density-based clustering and diagnostics.
 
-Not implemented in Phase 1.
+Not implemented in Phase 2.
 
 ### HDBSCAN Clustering
 
@@ -79,7 +84,7 @@ HDBSCAN is planned to discover dense semantic groups without requiring a fixed
 number of clusters. It can also identify noise points that do not fit a strong
 theme.
 
-Not implemented in Phase 1.
+Not implemented in Phase 2.
 
 ### Theme Representation
 
@@ -94,7 +99,7 @@ size, confidence intervals, and exploratory uncertainty. This layer helps
 separate frequent themes from themes that are meaningfully associated with
 customer outcomes.
 
-Not implemented in Phase 1.
+Not implemented in Phase 2.
 
 ### LLM Labeling
 
@@ -102,7 +107,7 @@ LLMs are planned for cluster labels, concise summaries, and business-readable
 insight generation. They should operate on curated cluster evidence and should
 not replace embedding-based discovery or statistical analysis.
 
-Not implemented in Phase 1.
+Not implemented in Phase 2.
 
 ### Evidence-Backed Insight Report
 

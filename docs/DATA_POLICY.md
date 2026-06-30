@@ -49,6 +49,17 @@ Phase 1 is limited to ingestion, schema normalization, validation, sampling, and
 documentation. It does not produce embeddings, clusters, statistical tests,
 LLM-generated labels, or business conclusions.
 
+## Embedding Artifacts
+
+Phase 2 generates local sentence embedding files for prepared review samples.
+These files are derived from review text and must remain ignored local artifacts.
+Do not commit `.npy` files, model caches, real processed review data, or ID files
+generated from real review samples.
+
+The default embedding output directory is `data/processed/embeddings/`, which is
+covered by the repository data ignore rules. Phase 2 does not require paid APIs,
+external API keys, clustering, statistical tests, or LLM labeling.
+
 ## Review Before Commit
 
 Before committing, check git status and staged files for data or secrets. If

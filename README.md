@@ -47,11 +47,11 @@ remain traceable to review evidence.
 
 ## Current Status
 
-Phase 1.1 is complete. The repository includes local-only ingestion, schema
-normalization, validation summaries, deterministic sampling, and a lightweight
-preparation script for a small Amazon Reviews 2023 category sample.
+Phase 2 is complete. The repository includes local-only ingestion, schema
+normalization, validation summaries, deterministic sampling, and a local
+sentence embedding workflow for prepared review samples.
 
-Phase 2 is next: sentence embeddings and semantic representation.
+Phase 3 is next: UMAP and HDBSCAN theme discovery.
 
 ## Phase 1 Data Ingestion
 
@@ -93,6 +93,30 @@ If the raw dataset does not provide `review_id`, the ingestion code creates a
 deterministic generated ID from stable row fields. Missing optional fields are
 retained as nullable values so downstream validation can report data quality
 honestly.
+
+## Phase 2 Sentence Embeddings
+
+Phase 2 converts cleaned review text into dense semantic vectors with the local
+open-source model `sentence-transformers/all-MiniLM-L6-v2` by default.
+Embeddings are a representation layer for later clustering and diagnostics; they
+are not business conclusions by themselves.
+
+To embed a prepared local Phase 1 sample:
+
+```powershell
+py -3 scripts/embed_reviews.py `
+  --input data/processed/reviews_sample.parquet `
+  --output-dir data/processed/embeddings `
+  --prefix reviews_sample `
+  --limit 500
+```
+
+Generated embedding artifacts are written under ignored local paths such as
+`data/processed/embeddings/` and must not be committed. Phase 2 does not perform
+UMAP, HDBSCAN, clustering, statistical tests, or LLM labeling.
+
+TF-IDF or c-TF-IDF remains useful in later phases for explainability and cluster
+keyword representation, not as the main semantic clustering method.
 
 ## Data Policy Summary
 
