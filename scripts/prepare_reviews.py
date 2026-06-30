@@ -16,11 +16,12 @@ from feedback_theme_engine.data_ingestion import (
     DEFAULT_CATEGORY,
     DEFAULT_OUTPUT_PATH,
     IngestionConfig,
+    TRUST_REMOTE_CODE_NOTE,
     prepare_reviews_dataset,
 )
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Prepare a local Amazon Reviews 2023 sample.")
     parser.add_argument("--category", default=DEFAULT_CATEGORY)
     parser.add_argument("--sample-size", type=int, default=5_000)
@@ -33,7 +34,16 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Require the dataset to already exist in the local Hugging Face cache.",
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--trust-remote-code",
+        action="store_true",
+        help=(
+            "Allow Hugging Face to execute dataset loading code. "
+            "Use only after reviewing and trusting the dataset source."
+        ),
+    )
+    parser.epilog = TRUST_REMOTE_CODE_NOTE
+    return parser.parse_args(argv)
 
 
 def main() -> None:
@@ -46,6 +56,7 @@ def main() -> None:
         split=args.split,
         min_review_text_length=args.min_review_text_length,
         local_files_only=args.local_files_only,
+        trust_remote_code=args.trust_remote_code,
     )
     _reviews, summary = prepare_reviews_dataset(config)
     print(json.dumps(summary.to_dict(), indent=2, sort_keys=True))

@@ -21,6 +21,11 @@ from feedback_theme_engine.text_cleaning import basic_clean_text
 AMAZON_REVIEWS_DATASET = "McAuley-Lab/Amazon-Reviews-2023"
 DEFAULT_CATEGORY = "raw_review_All_Beauty"
 DEFAULT_OUTPUT_PATH = Path("data/processed/reviews_sample.parquet")
+TRUST_REMOTE_CODE_NOTE = (
+    "Amazon Reviews 2023 may require Hugging Face dataset code execution. "
+    "Only rerun with trust_remote_code=True or the --trust-remote-code CLI flag "
+    "after you have reviewed and trust the dataset source."
+)
 
 COLUMN_ALIASES: dict[str, tuple[str, ...]] = {
     "review_id": ("review_id", "id"),
@@ -47,6 +52,7 @@ class IngestionConfig:
     split: str = "full"
     min_review_text_length: int | None = 1
     local_files_only: bool = False
+    trust_remote_code: bool = False
 
 
 def iter_amazon_reviews_category(
@@ -55,12 +61,17 @@ def iter_amazon_reviews_category(
     split: str = "full",
     streaming: bool = True,
     local_files_only: bool = False,
+    trust_remote_code: bool = False,
 ) -> Iterable[Mapping[str, Any]]:
     """Return an iterable of raw Amazon Reviews 2023 records.
 
     The loader uses Hugging Face ``datasets`` in streaming mode by default so a
     full category does not need to be materialized in memory. Set
     ``local_files_only=True`` to require an already-populated local dataset cache.
+
+    Some Hugging Face datasets require remote dataset code execution. This is
+    disabled by default; opt in with ``trust_remote_code=True`` only after
+    reviewing and trusting the dataset source.
     """
     try:
         from datasets import DownloadConfig, load_dataset
@@ -71,13 +82,19 @@ def iter_amazon_reviews_category(
         ) from exc
 
     download_config = DownloadConfig(local_files_only=local_files_only)
-    dataset = load_dataset(
-        AMAZON_REVIEWS_DATASET,
-        category,
-        split=split,
-        streaming=streaming,
-        download_config=download_config,
-    )
+    try:
+        dataset = load_dataset(
+            AMAZON_REVIEWS_DATASET,
+            category,
+            split=split,
+            streaming=streaming,
+            download_config=download_config,
+            trust_remote_code=trust_remote_code,
+        )
+    except ValueError as exc:
+        if _looks_like_remote_code_error(exc):
+            raise RuntimeError(TRUST_REMOTE_CODE_NOTE) from exc
+        raise
     return dataset
 
 
@@ -123,6 +140,7 @@ def prepare_reviews_dataset(config: IngestionConfig) -> tuple[pd.DataFrame, Vali
         split=config.split,
         streaming=True,
         local_files_only=config.local_files_only,
+        trust_remote_code=config.trust_remote_code,
     )
     sampled_records = reservoir_sample_records(
         raw_records,
@@ -219,3 +237,8 @@ def _resolve_processed_output_path(output_path: str | Path) -> Path:
     except ValueError as exc:
         raise ValueError("processed review output must be written under data/processed/") from exc
     return resolved_path
+
+
+def _looks_like_remote_code_error(error: ValueError) -> bool:
+    message = str(error).lower()
+    return "trust_remote_code" in message or "remote code" in message

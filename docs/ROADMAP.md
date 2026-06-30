@@ -24,12 +24,15 @@ Exit criteria:
 
 ## Phase 1: Data Ingestion and Review Schema
 
+Status: complete.
+
 Goal: Define safe ingestion patterns and validate review data without committing raw datasets.
 
 Deliverables:
 
 - Local ingestion script for `McAuley-Lab/Amazon-Reviews-2023`.
 - Starting category: `raw_review_All_Beauty`.
+- Explicit `trust_remote_code` opt-in for Hugging Face dataset loading.
 - Normalized review schema with review text and rating outcome.
 - Required-column, rating-range, empty-text, duplicate-ID, and distribution validation.
 - Deterministic sampling with optional minimum text length.
@@ -50,6 +53,8 @@ Exit criteria:
 - Phase 1 does not implement embeddings, clustering, statistical tests, or LLM labeling.
 
 ## Phase 2: Sentence Embeddings and Semantic Representation
+
+Status: next.
 
 Goal: Represent review text with sentence embeddings.
 

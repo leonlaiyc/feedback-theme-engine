@@ -1,6 +1,14 @@
-import pandas as pd
+import sys
+from types import ModuleType
 
-from feedback_theme_engine.data_ingestion import normalize_review_schema
+import pandas as pd
+import pytest
+
+from feedback_theme_engine.data_ingestion import (
+    IngestionConfig,
+    iter_amazon_reviews_category,
+    normalize_review_schema,
+)
 
 
 def test_normalize_review_schema_maps_amazon_review_columns() -> None:
@@ -56,3 +64,55 @@ def test_normalize_review_schema_preserves_existing_review_id() -> None:
 
     assert normalized.loc[0, "review_id"] == "r1"
     assert normalized.loc[0, "review_text"] == "Works well."
+
+
+def test_ingestion_config_does_not_trust_remote_code_by_default() -> None:
+    assert IngestionConfig().trust_remote_code is False
+
+
+def test_iter_amazon_reviews_category_passes_trust_remote_code(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls = {}
+    fake_datasets = ModuleType("datasets")
+
+    class FakeDownloadConfig:
+        def __init__(self, *, local_files_only: bool) -> None:
+            self.local_files_only = local_files_only
+
+    def fake_load_dataset(*args, **kwargs):
+        calls["args"] = args
+        calls["kwargs"] = kwargs
+        return [{"text": "Synthetic review.", "rating": 5}]
+
+    fake_datasets.DownloadConfig = FakeDownloadConfig
+    fake_datasets.load_dataset = fake_load_dataset
+    monkeypatch.setitem(sys.modules, "datasets", fake_datasets)
+
+    records = iter_amazon_reviews_category(
+        "raw_review_All_Beauty",
+        local_files_only=True,
+        trust_remote_code=True,
+    )
+
+    assert list(records) == [{"text": "Synthetic review.", "rating": 5}]
+    assert calls["kwargs"]["trust_remote_code"] is True
+    assert calls["kwargs"]["download_config"].local_files_only is True
+
+
+def test_iter_amazon_reviews_category_explains_remote_code_opt_in(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    fake_datasets = ModuleType("datasets")
+
+    class FakeDownloadConfig:
+        def __init__(self, *, local_files_only: bool) -> None:
+            self.local_files_only = local_files_only
+
+    def fake_load_dataset(*args, **kwargs):
+        raise ValueError("Use trust_remote_code=True to allow remote code")
+
+    fake_datasets.DownloadConfig = FakeDownloadConfig
+    fake_datasets.load_dataset = fake_load_dataset
+    monkeypatch.setitem(sys.modules, "datasets", fake_datasets)
+
+    with pytest.raises(RuntimeError, match="--trust-remote-code"):
+        iter_amazon_reviews_category("raw_review_All_Beauty")

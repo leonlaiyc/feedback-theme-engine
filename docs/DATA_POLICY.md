@@ -19,7 +19,9 @@ This repository must keep data handling conservative and explicit.
 
 ## Processed Data
 
-Real processed datasets should not be committed unless they are small, license-safe, and explicitly approved. The default is to regenerate processed data locally from user-provided raw data.
+Real processed datasets should not be committed unless they are small,
+license-safe, and explicitly approved. The default is to regenerate processed
+data locally from user-provided raw data.
 
 ## Environment Files
 
@@ -27,11 +29,24 @@ Do not add `.env` in Phase 0. A `.env.example` may be added later only if it is 
 
 ## Dataset Acquisition
 
-Phase 1 uses `McAuley-Lab/Amazon-Reviews-2023` as a public research dataset for local experimentation. The initial subset is `raw_review_All_Beauty`, which includes review text and rating outcomes useful for later exploratory theme-to-rating analysis.
+Phase 1 uses `McAuley-Lab/Amazon-Reviews-2023` as a public research dataset for
+local experimentation. The initial subset is `raw_review_All_Beauty`, which
+includes review text and rating outcomes useful for later exploratory
+theme-to-rating analysis.
 
-The repository must not redistribute raw Amazon review data or processed real review samples. Users may prepare a local sample with `scripts/prepare_reviews.py`, but generated files must remain under ignored folders such as `data/raw/` or `data/processed/`.
+The repository must not redistribute raw Amazon review data or processed real
+review samples. Users may prepare a local sample with
+`scripts/prepare_reviews.py`, but generated files must remain under ignored
+folders such as `data/raw/` or `data/processed/`.
 
-Phase 1 is limited to ingestion, schema normalization, validation, sampling, and documentation. It does not produce embeddings, clusters, statistical tests, LLM-generated labels, or business conclusions.
+Some Hugging Face datasets may require remote dataset loading code. The
+preparation script keeps this disabled by default and exposes
+`--trust-remote-code` as an explicit user opt-in. Enable it only after reviewing
+and trusting the dataset source.
+
+Phase 1 is limited to ingestion, schema normalization, validation, sampling, and
+documentation. It does not produce embeddings, clusters, statistical tests,
+LLM-generated labels, or business conclusions.
 
 ## Review Before Commit
 
