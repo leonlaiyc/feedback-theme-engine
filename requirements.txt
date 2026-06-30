@@ -1,5 +1,7 @@
 pandas
 numpy
+pyarrow
+datasets
 scikit-learn
 scipy
 statsmodels

@@ -28,20 +28,26 @@ Goal: Define safe ingestion patterns and validate review data without committing
 
 Deliverables:
 
-- Review schema validation.
-- Documented dataset acquisition steps.
-- Toy sample data or schema examples only.
-- Clear separation of raw, processed, and sample paths.
+- Local ingestion script for `McAuley-Lab/Amazon-Reviews-2023`.
+- Starting category: `raw_review_All_Beauty`.
+- Normalized review schema with review text and rating outcome.
+- Required-column, rating-range, empty-text, duplicate-ID, and distribution validation.
+- Deterministic sampling with optional minimum text length.
+- Toy tests only; no real dataset fixtures in git.
+- Clear separation of raw and processed ignored paths.
 
 Interview defendable:
 
 - How data quality issues are detected.
 - Why raw and processed real data are excluded from git.
+- Why ingestion starts with All_Beauty and stops before modeling.
 
 Exit criteria:
 
-- Ingestion accepts local user-provided data.
-- Validation errors are clear and tested.
+- Ingestion can prepare a local sample from a user-accessible dataset source.
+- Validation errors are clear and tested with synthetic data.
+- No raw or processed real review files are tracked.
+- Phase 1 does not implement embeddings, clustering, statistical tests, or LLM labeling.
 
 ## Phase 2: Sentence Embeddings and Semantic Representation
 
@@ -151,4 +157,3 @@ Interview defendable:
 Exit criteria:
 
 - Portfolio presentation is coherent, honest, and reproducible.
-

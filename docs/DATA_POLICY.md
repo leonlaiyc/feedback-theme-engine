@@ -27,9 +27,12 @@ Do not add `.env` in Phase 0. A `.env.example` may be added later only if it is 
 
 ## Dataset Acquisition
 
-Dataset download steps will be documented in a later phase. Phase 0 does not download external datasets.
+Phase 1 uses `McAuley-Lab/Amazon-Reviews-2023` as a public research dataset for local experimentation. The initial subset is `raw_review_All_Beauty`, which includes review text and rating outcomes useful for later exploratory theme-to-rating analysis.
+
+The repository must not redistribute raw Amazon review data or processed real review samples. Users may prepare a local sample with `scripts/prepare_reviews.py`, but generated files must remain under ignored folders such as `data/raw/` or `data/processed/`.
+
+Phase 1 is limited to ingestion, schema normalization, validation, sampling, and documentation. It does not produce embeddings, clusters, statistical tests, LLM-generated labels, or business conclusions.
 
 ## Review Before Commit
 
 Before committing, check git status and staged files for data or secrets. If there is any doubt, do not commit the file.
-
