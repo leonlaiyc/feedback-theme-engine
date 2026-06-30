@@ -3,48 +3,57 @@ __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-*.egg-info/
-dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 build/
-.eggs/
-*.egg
+dist/
+*.egg-info/
 
 # Virtual environments
-venv/
 .venv/
+venv/
 env/
-.env/
+ENV/
 
-# Jupyter
+# Notebooks
 .ipynb_checkpoints/
-*.ipynb
 
-# Data files — never commit raw or processed data
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secret.*
+secrets.*
+*.secret
+*.secrets
+
+# Data policy: do not commit raw or real processed datasets
 data/raw/*
-data/processed/*
 !data/raw/.gitkeep
+data/processed/*
 !data/processed/.gitkeep
 
-# HuggingFace cache
-~/.cache/huggingface/
-.cache/
-
-# Model outputs, embeddings, cluster outputs (added in later phases)
-outputs/
-*.pkl
+# Large generated artifacts
+artifacts/
+models/
+embeddings/
 *.npy
-*.faiss
+*.npz
+*.parquet
+*.pkl
+*.joblib
 
-# OS
+# Outputs generated from real data unless explicitly approved
+outputs/*
+!outputs/.gitkeep
+
+# OS and editor files
 .DS_Store
 Thumbs.db
-
-# IDE
-.vscode/
 .idea/
-*.swp
-
-# Secrets
-.env
-*.env
-secrets.json
+.vscode/

@@ -1,87 +1,46 @@
-# Feedback Theme Engine
+# Customer Feedback Theme Engine
 
-A reusable NLP pipeline that converts unstructured text (reviews, complaints, transaction notes)
-into structured business insight via embeddings → clustering → statistical validation → LLM labeling.
+An embedding-first analytics framework for discovering customer feedback themes and turning them into evidence-backed product insights.
 
-**Demo dataset:** Amazon product reviews, Home & Kitchen category (8,000 reviews, public domain).
+## Why This Project Exists
 
----
+Product reviews, support tickets, and survey comments often contain the clearest signals about customer needs, frustrations, and purchase drivers. The hard part is not summarizing comments one by one. The hard part is building a defensible workflow that groups semantically similar feedback, quantifies which themes matter, and keeps every conclusion tied to source evidence.
 
-## Design Philosophy
+This project demonstrates a practical approach to customer feedback analytics for portfolio and interview settings.
 
-**General engine + one demo scenario.** The core pipeline is domain-agnostic. The demo uses Amazon
-product reviews (Home & Kitchen category) as a concrete, public dataset with diverse complaint types.
+## What This Project Demonstrates
 
----
+- Review data modeling and validation.
+- Conservative text cleaning for customer feedback.
+- Sentence embeddings for semantic representation.
+- Dimensionality reduction and density-based clustering for theme discovery.
+- TF-IDF or c-TF-IDF as explainability and keyword representation, not the main semantic method.
+- Statistical signal analysis for prevalence, rating association, effect size, and uncertainty.
+- LLM-assisted labeling and business-readable summaries, with source-review traceability.
 
-## Project Structure
+## Methodology Overview
 
-```
-feedback-theme-engine/
-├── src/
-│   ├── data_prep.py      # Phase 0: data acquisition, cleaning, sanity checks
-│   └── embed.py          # Phase 1: sentence embeddings + similarity sanity check
-├── notebooks/            # Optional exploratory notebooks (never a source of truth)
-├── data/
-│   ├── raw/              # gitignored — never committed
-│   └── processed/        # gitignored — never committed
-├── requirements.txt
-└── README.md
-```
+The planned pipeline starts with review text and rating outcomes. Reviews are validated, cleaned conservatively, embedded into semantic vectors, projected into a lower-dimensional space, and clustered with density-based methods. Each cluster is represented with keywords and examples, evaluated through statistical signals, and later labeled with LLM assistance. Final insights should remain traceable to review evidence.
 
----
+## Current Status
 
-## Phases
+Phase 0 initialized: repository foundation, documentation, data policy, repo-scoped Codex skills, minimal Python skeleton, and basic tests.
 
-| Phase | Description | Status |
-|---|---|---|
-| 0 | Data acquisition, cleaning, sanity checks | done |
-| 1 | Embedding generation | done |
-| 2 | Clustering | planned |
-| 3 | Statistical validation | planned |
-| 4 | LLM cluster labeling | planned |
-| 5 | Business insight report | planned |
+## Planned Roadmap
 
----
+- Phase 1: Data ingestion and review schema.
+- Phase 2: Sentence embeddings and semantic representation.
+- Phase 3: UMAP and HDBSCAN theme discovery.
+- Phase 4: Statistical signal layer.
+- Phase 5: LLM-assisted labeling and insight generation.
+- Phase 6: Portfolio packaging.
 
-## Quickstart
+## Data Policy Summary
 
-```bash
-python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
+Raw external datasets, real processed datasets, API keys, tokens, credentials, and `.env` files must not be committed. Only toy samples, schema examples, and explicitly approved derived summaries should be tracked.
 
-pip install -r requirements.txt
+Dataset download steps will be documented in a later phase. This repository does not include company-specific, proprietary, or confidential data.
 
-# Phase 0 — clean and downsample raw reviews
-python src/data_prep.py
+## Scope and Limitations
 
-# Phase 1 — generate embeddings (skips if already on disk)
-python src/embed.py
-```
-
-Outputs land in `data/processed/`. All paths are relative to the project root.
-
----
-
-## Reproducibility
-
-All scripts use a fixed random seed (`RANDOM_SEED = 42`). Dependencies are pinned in
-`requirements.txt`. Each script runs end-to-end from a clean checkout with no manual steps,
-assuming the previous phase's output exists in `data/processed/`.
-
----
-
-## Methodology & Attribution
-
-| Decision | Origin | Notes |
-|---|---|---|
-| Category: Home_and_Kitchen | Human (deliberate) | Mid-size, diverse complaint themes (appliances, cookware, storage) |
-| Text: title + body concatenation | Human (deliberate) | Title captures the core complaint; body has context |
-| Min-word threshold: 5 | Human (deliberate) | Trades recall for signal quality; affects later prevalence counts |
-| Random seed: 42 | Conventional default | Reproducibility only |
-| Downsample target: 8 000 | Human (deliberate) | Large enough for meaningful clusters; small enough for free-tier LLM labeling |
-| Embedding model: all-MiniLM-L6-v2 | Human (deliberate) | Fast on CPU, 384-dim, well-understood tradeoff vs. mpnet (see embed.py) |
-| Long-text handling: truncation | Human (deliberate) | Sentiment is front-loaded; chunking is a production refinement, out of scope |
+This is an early-stage portfolio project and demonstration framework. It is not a production SaaS product, not a company-specific analysis, and not evidence of real-world business conclusions for any named company. Results produced in later phases should be treated as exploratory unless the methodology and data support stronger claims.
