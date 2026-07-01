@@ -71,6 +71,19 @@ by the repository data ignore rules. Phase 3 does not perform statistical
 significance testing, rating association analysis, Wilson confidence intervals,
 LLM labeling, or LLM summarization.
 
+## Statistical Signal Artifacts
+
+Phase 4 generates local statistical signal outputs such as `theme_signals.csv`
+and `theme_signals.json`. These files are derived from review ratings and theme
+assignments and must not be committed.
+
+The default signal output directory is `data/processed/themes/`, which is
+covered by the repository data ignore rules. Phase 4 does not use paid APIs,
+external API keys, LLM labeling, or LLM summarization.
+
+Statistical outputs are exploratory. They should not be described as causal
+impact, confirmatory proof, or real company conclusions.
+
 ## Review Before Commit
 
 Before committing, check git status and staged files for data or secrets. If

@@ -39,7 +39,8 @@ Planned outputs:
 - Discovered theme clusters.
 - Cluster diagnostics and representative review examples.
 - Theme-level keyword and example evidence.
-- Theme prevalence and rating association statistics.
+- Theme prevalence, uncertainty, rating association, effect size, and
+  multiple-testing-adjusted signal statistics.
 - LLM-assisted theme labels and summaries.
 - Evidence-backed insight report.
 
@@ -51,7 +52,8 @@ Planned outputs:
 4. Reduce embedding dimensionality for clustering.
 5. Discover dense semantic groups with HDBSCAN.
 6. Represent themes with keywords, examples, and source evidence.
-7. Quantify theme prevalence, rating association, effect size, and uncertainty.
+7. Quantify theme prevalence, rating association, effect size, uncertainty, and
+   multiple-testing-adjusted exploratory signals.
 8. Use LLMs only for cluster labeling, theme summaries, and readable insight
    generation.
 9. Keep final insights traceable to source reviews.
@@ -72,6 +74,8 @@ Planned outputs:
 - Data and secrets policies are explicit and enforced through `.gitignore`.
 - Every planned insight type has a path back to source review evidence.
 - Statistical claims are framed with appropriate uncertainty and limitations.
+- Theme-rating signals are treated as exploratory prioritization, not causal or
+  confirmatory proof.
 
 ## Interview Defend Points
 

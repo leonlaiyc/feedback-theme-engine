@@ -107,7 +107,14 @@ size, confidence intervals, and exploratory uncertainty. This layer helps
 separate frequent themes from themes that are meaningfully associated with
 customer outcomes.
 
-Not implemented in Phase 3.
+Phase 4 computes non-noise theme prevalence with Wilson confidence intervals,
+rating association with Mann-Whitney U tests, rank-biserial effect sizes, and
+Benjamini-Hochberg FDR-adjusted p-values.
+
+These outputs are exploratory prioritization signals. Themes are discovered from
+the data before testing, so the rating associations are not confirmatory proof
+and should not be interpreted causally. A stronger future design can discover
+themes on one split and validate associations on a holdout split.
 
 ### LLM Labeling
 
@@ -115,7 +122,7 @@ LLMs are planned for cluster labels, concise summaries, and business-readable
 insight generation. They should operate on curated cluster evidence and should
 not replace embedding-based discovery or statistical analysis.
 
-Not implemented in Phase 3.
+Not implemented in Phase 4.
 
 ### Evidence-Backed Insight Report
 
@@ -129,6 +136,6 @@ statistics, and documented limitations.
   geometry.
 - TF-IDF / c-TF-IDF role: support keyword representation and explainability.
 - Statistical layer role: quantify prevalence, association, effect size, and
-  uncertainty.
+  uncertainty for exploratory prioritization.
 - LLM role: improve readability through labeling and summarization from
   evidence.

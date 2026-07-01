@@ -47,11 +47,12 @@ remain traceable to review evidence.
 
 ## Current Status
 
-Phase 3 is complete. The repository includes local-only ingestion, schema
+Phase 4 is complete. The repository includes local-only ingestion, schema
 normalization, deterministic sampling, local sentence embeddings, and UMAP +
-HDBSCAN candidate theme discovery.
+HDBSCAN candidate theme discovery, plus exploratory statistical signals for
+theme prioritization.
 
-Phase 4 is next: statistical signal analysis for exploratory prioritization.
+Phase 5 is next: LLM-assisted labeling and insight generation.
 
 ## Phase 1 Data Ingestion
 
@@ -144,6 +145,37 @@ py -3 scripts/discover_themes.py `
 
 Generated theme outputs are written under ignored local paths such as
 `data/processed/themes/` and must not be committed.
+
+## Phase 4 Statistical Signals
+
+Phase 4 quantifies candidate themes with prevalence, uncertainty, rating
+association, effect size, and multiple-testing correction. The output supports
+exploratory prioritization, not causal proof or confirmatory inference.
+
+For each non-noise theme, the signal layer calculates:
+
+- Review count and prevalence share.
+- Wilson confidence interval for prevalence.
+- Mean rating inside the theme and outside the theme.
+- Rating gap between theme and non-theme reviews.
+- Mann-Whitney U p-value as a default non-parametric association test.
+- Rank-biserial effect size.
+- Benjamini-Hochberg FDR-adjusted p-value.
+- Cautious interpretation label.
+
+To analyze a local Phase 3 cluster assignment file that includes ratings:
+
+```powershell
+py -3 scripts/analyze_theme_signals.py `
+  --cluster-input data/processed/themes/cluster_assignments.parquet `
+  --output-dir data/processed/themes `
+  --min-theme-size 10
+```
+
+Themes are discovered from the same data being analyzed, so these tests are
+post-discovery signals. A stronger future design can discover themes on one
+split and validate associations on a holdout split. Generated signal outputs are
+ignored local artifacts and must not be committed.
 
 ## Data Policy Summary
 

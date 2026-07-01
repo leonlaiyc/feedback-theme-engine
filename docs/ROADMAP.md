@@ -121,7 +121,7 @@ Exit criteria:
 
 ## Phase 4: Statistical Signal Layer
 
-Status: next.
+Status: complete.
 
 Goal: Quantify which themes matter and how they relate to rating outcomes.
 
@@ -129,22 +129,31 @@ Deliverables:
 
 - Theme prevalence metrics.
 - Rating association measures.
-- Effect sizes and confidence intervals.
-- Multiple testing correction guidance.
+- Wilson confidence intervals for prevalence.
+- Mann-Whitney U rating association tests.
+- Rank-biserial effect sizes.
+- Benjamini-Hochberg FDR multiple testing correction.
 - Exploratory versus confirmatory interpretation notes.
+- CLI script for local-only statistical signal outputs.
 
 Interview defendable:
 
 - How prevalence differs from importance.
 - Why uncertainty matters in theme prioritization.
 - How to avoid overstating exploratory results.
+- Why post-discovery theme tests are exploratory signals.
+- How a future discovery/validation split could strengthen inference.
 
 Exit criteria:
 
 - Theme metrics are computed and tested on toy data.
 - Outputs include appropriate caveats.
+- Generated statistical signal outputs are ignored local artifacts.
+- Phase 4 does not implement LLM labeling or LLM summaries.
 
 ## Phase 5: LLM-Assisted Labeling and Insight Generation
+
+Status: next.
 
 Goal: Use LLMs to label clusters and generate readable insights while preserving
 evidence traceability.
