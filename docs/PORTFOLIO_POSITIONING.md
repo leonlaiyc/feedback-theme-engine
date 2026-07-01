@@ -21,7 +21,7 @@ claims exploratory unless supported by stronger evidence.
 
 The project combines NLP embeddings, dimensionality reduction, clustering,
 statistical signal analysis, and careful evaluation framing. It is designed to
-be explainable in interviews and reproducible in code.
+be explainable from the repository documentation and reproducible in code.
 
 ## LLM Applications
 
@@ -37,9 +37,9 @@ and statistically informed.
 - Not a company-specific analysis.
 - Not evidence of real business conclusions about Amazon or any other company.
 
-## Portfolio Review Notes
+## Public Repository Notes
 
-Recruiters should be able to understand the project from the README, synthetic
-examples, and portfolio summary. Technical interviewers should be able to trace
-the methodology from ingestion through embeddings, clustering, statistical
-signals, and evidence-bounded LLM labeling.
+Readers should be able to understand the project from the README, synthetic
+examples, and project documentation. The methodology should be traceable from
+ingestion through embeddings, clustering, statistical signals, and
+evidence-bounded LLM labeling.

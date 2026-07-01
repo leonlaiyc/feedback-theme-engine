@@ -15,14 +15,14 @@ The target user is an analytics, product, or data science stakeholder who needs
 to understand what customers are repeatedly saying, how those themes relate to
 rating outcomes, and which themes deserve attention.
 
-## Portfolio Goal
+## Project Goal
 
-The portfolio goal is to demonstrate applied analytics engineering, customer
-analytics thinking, semantic NLP methods, statistical signal interpretation, and
-responsible LLM usage in one coherent project.
+The project goal is to demonstrate applied analytics engineering, customer
+analytics methods, semantic NLP, statistical signal interpretation, and
+responsible LLM usage in one coherent workflow.
 
-Phase 6 packages that work for recruiter review and technical interview defense
-through polished documentation, synthetic examples, and public-profile assets.
+Phase 6 packages the workflow as a public repository with polished
+documentation, synthetic examples, and clear limitations.
 
 ## Inputs and Outputs
 
@@ -75,7 +75,7 @@ Planned outputs:
 ## Success Criteria
 
 - The project has a clean, testable Python structure.
-- Methodology is documented clearly enough to defend in interviews.
+- Methodology is documented clearly enough for technical review.
 - Data and secrets policies are explicit and enforced through `.gitignore`.
 - Every planned insight type has a path back to source review evidence.
 - Statistical claims are framed with appropriate uncertainty and limitations.
@@ -83,7 +83,7 @@ Planned outputs:
   confirmatory proof.
 - Portfolio examples are synthetic only and clearly labeled.
 
-## Interview Defend Points
+## Design Review Points
 
 - Why embeddings are used for semantic representation.
 - Why TF-IDF or c-TF-IDF is used for representation and explainability rather

@@ -15,7 +15,6 @@ business insights.
 - Do not claim findings represent Amazon, any company, or any real business conclusion.
 - Keep abstract sections concise and strong.
 - Keep detailed sections complete and clear.
-- For public-facing English examples, include a Chinese translation for the project owner's understanding.
 - Avoid the sentence pattern "The hard part is not X. The hard part is Y."
 
 ## Data and Secrets

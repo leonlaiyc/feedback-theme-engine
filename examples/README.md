@@ -11,4 +11,4 @@ The purpose of this folder is to show the final output shape that the project ca
 
 ## Safe Usage
 
-Use these examples for portfolio review, README references, and interview discussion. Do not describe them as real review findings or real company analysis.
+Use these examples for public project documentation and README references. Do not describe them as real review findings or real company analysis.

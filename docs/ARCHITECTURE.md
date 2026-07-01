@@ -152,6 +152,6 @@ unless explicitly approved for safe publication.
 
 ## Portfolio Packaging
 
-Phase 6 adds recruiter-readable packaging around the existing pipeline. The
+Phase 6 adds public project documentation around the existing pipeline. The
 tracked examples under `examples/` are synthetic only and demonstrate report
 shape, not real review findings.

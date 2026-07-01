@@ -13,7 +13,7 @@ Deliverables:
 - Minimal package skeleton.
 - Basic schema and text-cleaning tests.
 
-Interview defendable:
+Design rationale:
 
 - Project scope, methodology, and data boundaries.
 - Why this is an analytics engineering project rather than a simple LLM demo.
@@ -43,7 +43,7 @@ Deliverables:
 - Toy tests only; no real dataset fixtures in git.
 - Clear separation of raw and processed ignored paths.
 
-Interview defendable:
+Design rationale:
 
 - How data quality issues are detected.
 - Why raw and processed real data are excluded from git.
@@ -72,7 +72,7 @@ Deliverables:
 - Similarity sanity helper for toy examples.
 - Tests with fake models only; no model downloads required.
 
-Interview defendable:
+Design rationale:
 
 - Why sentence embeddings are better suited than bag-of-words for semantic
   grouping.
@@ -104,7 +104,7 @@ Deliverables:
 - TF-IDF keyword extraction for cluster representation and explainability.
 - CLI script for local-only theme discovery from Phase 2 artifacts.
 
-Interview defendable:
+Design rationale:
 
 - Why UMAP is used before clustering.
 - Why HDBSCAN is appropriate for unknown, uneven theme shapes.
@@ -136,7 +136,7 @@ Deliverables:
 - Exploratory versus confirmatory interpretation notes.
 - CLI script for local-only statistical signal outputs.
 
-Interview defendable:
+Design rationale:
 
 - How prevalence differs from importance.
 - Why uncertainty matters in theme prioritization.
@@ -167,7 +167,7 @@ Deliverables:
 - Markdown insight report renderer with exploratory caveat.
 - CLI script for local-only insight drafts.
 
-Interview defendable:
+Design rationale:
 
 - Why LLMs are not used as the primary clustering mechanism.
 - How hallucination risk is reduced.
@@ -186,19 +186,17 @@ Exit criteria:
 
 Status: complete.
 
-Goal: Package the project for recruiter and hiring-manager review.
+Goal: Package the project as a public portfolio repository.
 
 Deliverables:
 
 - Polished README.
 - Synthetic-only example signal table and insight report.
-- Interview defense notes.
-- LinkedIn project assets.
-- Portfolio summary.
+- Public project documentation cleanup.
 - Reproducible CLI workflow documentation.
 - Data and git hygiene audit.
 
-Interview defendable:
+Design rationale:
 
 - End-to-end story from data to decision-ready insight.
 - Tradeoffs, limitations, and next steps.
@@ -207,5 +205,30 @@ Interview defendable:
 Exit criteria:
 
 - Portfolio presentation is coherent, honest, and reproducible.
-- README, docs, and examples are clearly labeled and recruiter-readable.
+- README, docs, and examples are clearly labeled and public-readable.
 - Synthetic examples are tracked; real generated data artifacts remain ignored.
+
+## Phase 6.1: Public Repository Cleanup
+
+Status: complete.
+
+Goal: Remove non-project materials from the public repository while preserving project-facing documentation.
+
+Deliverables:
+
+- Public README without non-project notes or translations.
+- Removed non-project assets from `docs/`.
+- Project-facing docs retained and adjusted for public repository context.
+- Synthetic examples checked for clear labeling.
+- Validation and data hygiene checks.
+
+Design rationale:
+
+- Keep the repository focused on the project, methodology, reproducibility, and limitations.
+- Keep non-project notes outside the public repo.
+
+Exit criteria:
+
+- Public docs describe the project without private self-positioning content.
+- No Python functionality changes.
+- No data downloads, API calls, secrets, or generated real-data outputs.
