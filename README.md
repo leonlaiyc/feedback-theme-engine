@@ -1,75 +1,55 @@
 # Customer Feedback Theme Engine
 
-An embedding-first analytics framework for discovering customer feedback themes
-and turning them into evidence-backed product insights.
+An embedding-first analytics workflow for turning unstructured customer feedback into traceable, evidence-backed theme insights.
 
 ## Why This Project Exists
 
-Product reviews, support tickets, and survey comments often contain the clearest
-signals about customer needs, frustrations, and purchase drivers.
+Customer feedback often contains repeated product concerns, purchase drivers, and usability signals, but the raw text is difficult to measure or defend in business discussions.
 
-This project turns unstructured feedback into structured, evidence-backed themes
-that can be reviewed, measured, and explained. It is built as a portfolio-ready
-analytics engineering project for customer feedback analysis.
+This project shows how to transform review text into candidate themes, quantify exploratory signals, and draft evidence-backed insights without claiming production readiness or real company conclusions.
 
 ## What This Project Demonstrates
 
-- Review data modeling and validation.
-- Conservative text cleaning for customer feedback.
-- Safe local ingestion for a public review dataset subset.
+- Customer feedback analytics from unstructured review text.
+- Data validation and local-only data handling.
 - Sentence embeddings for semantic representation.
-- Dimensionality reduction and density-based clustering for theme discovery.
-- TF-IDF or c-TF-IDF as explainability and keyword representation, not the main
-  semantic method.
-- Statistical signal analysis for prevalence, rating association, effect size,
-  and uncertainty.
-- LLM-assisted labeling and business-readable summaries, with source-review
-  traceability.
+- UMAP + HDBSCAN theme discovery.
+- TF-IDF / c-TF-IDF for explainability.
+- Exploratory statistical signal layer with prevalence, rating association, effect size, uncertainty, and FDR correction.
+- Mock-default LLM-assisted labeling and summarization.
+- Evidence-backed reporting from representative reviews, keywords, and theme statistics.
+- Reproducible CLI workflow and tested Python modules.
 
 ## Methodology Overview
 
-The planned pipeline starts with review text and rating outcomes. Reviews are
-validated, cleaned conservatively, embedded into semantic vectors, projected into
-a lower-dimensional space, and clustered with density-based methods.
+The pipeline follows this path:
 
-Each cluster is represented with keywords and examples, evaluated through
-statistical signals, and later labeled with LLM assistance. Final insights should
-remain traceable to review evidence.
+```text
+Raw reviews
+  -> schema validation
+  -> conservative text cleaning
+  -> sentence embeddings
+  -> UMAP
+  -> HDBSCAN
+  -> representative reviews and TF-IDF keywords
+  -> prevalence and rating-association signals
+  -> mock-default LLM-assisted labels
+  -> evidence-backed insight report
+```
 
-## Planned Roadmap
+Sentence embeddings provide the semantic representation used for similarity and clustering. HDBSCAN creates candidate themes from the embedding geometry after UMAP projection. TF-IDF and c-TF-IDF support keyword explanation for clusters, but they are not the main clustering method.
 
-- Phase 1: Data ingestion and review schema.
-- Phase 2: Sentence embeddings and semantic representation.
-- Phase 3: UMAP and HDBSCAN theme discovery.
-- Phase 4: Statistical signal layer.
-- Phase 5: LLM-assisted labeling and insight generation.
-- Phase 6: Portfolio packaging.
+The statistical layer is an exploratory prioritization layer. It measures prevalence, rating association, effect size, uncertainty, and multiple-testing-adjusted p-values, but it does not prove causality. The LLM layer labels and summarizes evidence-backed clusters; it does not discover clusters, override statistics, or invent supporting evidence.
 
-## Current Status
+## End-to-End Workflow
 
-Phase 5 is complete. The repository includes local-only ingestion, schema
-normalization, deterministic sampling, local sentence embeddings, and UMAP +
-HDBSCAN candidate theme discovery, plus exploratory statistical signals for
-theme prioritization and mock-default insight drafting.
+Install dependencies first:
 
-Phase 6 is next: portfolio packaging.
+```powershell
+py -3 -m pip install -r requirements.txt
+```
 
-## Phase 1 Data Ingestion
-
-Phase 1 uses the public research dataset
-`McAuley-Lab/Amazon-Reviews-2023` for local experimentation. The starting subset
-is `raw_review_All_Beauty` because it is relatively manageable and includes
-review text plus a rating outcome.
-
-That pairing enables later theme-to-rating signal analysis, but Phase 1 does not
-create embeddings, clusters, statistical tests, LLM labels, or business
-conclusions.
-
-Raw review files and processed real review samples are not redistributed in this
-repository. The local preparation script writes processed samples only under
-ignored data paths such as `data/processed/`.
-
-To prepare a small local sample after installing dependencies:
+Prepare a local review sample:
 
 ```powershell
 py -3 scripts/prepare_reviews.py `
@@ -79,30 +59,7 @@ py -3 scripts/prepare_reviews.py `
   --output data/processed/reviews_sample.parquet
 ```
 
-Some Hugging Face datasets may require remote dataset loading code. This project
-keeps that disabled by default. Use `--trust-remote-code` only after reviewing
-and trusting the dataset source.
-
-The normalized schema is:
-
-```text
-review_id, product_id, parent_product_id, user_id, review_text, review_title,
-rating, helpful_vote, verified_purchase, timestamp
-```
-
-If the raw dataset does not provide `review_id`, the ingestion code creates a
-deterministic generated ID from stable row fields. Missing optional fields are
-retained as nullable values so downstream validation can report data quality
-honestly.
-
-## Phase 2 Sentence Embeddings
-
-Phase 2 converts cleaned review text into dense semantic vectors with the local
-open-source model `sentence-transformers/all-MiniLM-L6-v2` by default.
-Embeddings are a representation layer for later clustering and diagnostics; they
-are not business conclusions by themselves.
-
-To embed a prepared local Phase 1 sample:
+Generate sentence embeddings:
 
 ```powershell
 py -3 scripts/embed_reviews.py `
@@ -112,28 +69,7 @@ py -3 scripts/embed_reviews.py `
   --limit 500
 ```
 
-Generated embedding artifacts are written under ignored local paths such as
-`data/processed/embeddings/` and must not be committed. Phase 2 does not perform
-UMAP, HDBSCAN, clustering, statistical tests, or LLM labeling.
-
-TF-IDF or c-TF-IDF remains useful in later phases for explainability and cluster
-keyword representation, not as the main semantic clustering method.
-
-## Phase 3 Theme Discovery
-
-Phase 3 applies UMAP to reduce high-dimensional sentence embeddings before
-clustering. HDBSCAN then discovers dense groups of semantically similar reviews
-and marks low-density points with label `-1` as noise.
-
-Cluster labels are initial candidate themes. They are not final business
-conclusions, and Phase 3 does not perform statistical significance testing,
-rating association analysis, or LLM labeling.
-
-The workflow keeps each cluster traceable to review IDs and source review text.
-It also produces deterministic representative examples, cluster diagnostics, and
-TF-IDF keyword representations for explainability.
-
-To run local candidate theme discovery after Phase 2 embedding generation:
+Discover candidate themes:
 
 ```powershell
 py -3 scripts/discover_themes.py `
@@ -143,27 +79,7 @@ py -3 scripts/discover_themes.py `
   --output-dir data/processed/themes
 ```
 
-Generated theme outputs are written under ignored local paths such as
-`data/processed/themes/` and must not be committed.
-
-## Phase 4 Statistical Signals
-
-Phase 4 quantifies candidate themes with prevalence, uncertainty, rating
-association, effect size, and multiple-testing correction. The output supports
-exploratory prioritization, not causal proof or confirmatory inference.
-
-For each non-noise theme, the signal layer calculates:
-
-- Review count and prevalence share.
-- Wilson confidence interval for prevalence.
-- Mean rating inside the theme and outside the theme.
-- Rating gap between theme and non-theme reviews.
-- Mann-Whitney U p-value as a default non-parametric association test.
-- Rank-biserial effect size.
-- Benjamini-Hochberg FDR-adjusted p-value.
-- Cautious interpretation label.
-
-To analyze a local Phase 3 cluster assignment file that includes ratings:
+Analyze exploratory statistical signals:
 
 ```powershell
 py -3 scripts/analyze_theme_signals.py `
@@ -172,29 +88,7 @@ py -3 scripts/analyze_theme_signals.py `
   --min-theme-size 10
 ```
 
-Themes are discovered from the same data being analyzed, so these tests are
-post-discovery signals. A stronger future design can discover themes on one
-split and validate associations on a holdout split. Generated signal outputs are
-ignored local artifacts and must not be committed.
-
-## Phase 5 Insight Drafting
-
-Phase 5 uses LLM-style prompts for theme labeling and business-readable insight
-drafts. The default provider is a deterministic local mock, so tests and local
-development require no paid API, external key, or network call.
-
-The LLM layer receives only structured evidence:
-
-- Cluster ID.
-- TF-IDF keywords.
-- Representative review snippets.
-- Prevalence and Wilson confidence interval.
-- Rating gap, adjusted p-value, interpretation label, and caution flags.
-
-LLM outputs are labels and draft explanations only. They do not create clusters,
-override statistical signals, invent evidence, or make causal claims.
-
-To draft local insights from Phase 3 and Phase 4 artifacts:
+Label theme insights with the deterministic mock provider:
 
 ```powershell
 py -3 scripts/label_theme_insights.py `
@@ -205,22 +99,61 @@ py -3 scripts/label_theme_insights.py `
   --provider mock
 ```
 
-Generated insight reports are ignored local artifacts and must not be committed
-unless explicitly approved and safe.
+Generated artifacts are written under ignored local paths such as `data/processed/`, `data/processed/embeddings/`, and `data/processed/themes/`. Real review samples, embeddings, clusters, statistical outputs, and generated insight reports should not be committed.
 
-## Data Policy Summary
+## Example Output
 
-Raw external datasets, real processed datasets, API keys, tokens, credentials,
-and `.env` files must not be committed. Only toy samples, schema examples, and
-explicitly approved derived summaries should be tracked.
+Synthetic example only, not real Amazon review results.
 
-This repository does not include raw Amazon review files, processed real review
-samples, company-specific proprietary data, or confidential data.
+| theme_label | prevalence | rating_gap | adjusted_p_value | interpretation | suggested_action |
+| --- | ---: | ---: | ---: | --- | --- |
+| Damaged packaging | 0.18 | -0.72 | 0.012 | Frequent theme with lower associated ratings in the toy sample. | Review fulfillment handoff points and packaging QA notes. |
+| Fragrance preference | 0.14 | 0.31 | 0.084 | Moderate prevalence with weak positive association in the toy sample. | Keep fragrance language clear in product copy and examples. |
+| Product size mismatch | 0.09 | -0.58 | 0.041 | Smaller theme with lower associated ratings in the toy sample. | Improve size guidance and expectation-setting content. |
+| Repeat purchase driver | 0.22 | 0.64 | 0.009 | Frequent theme with higher associated ratings in the toy sample. | Preserve the attributes customers cite as repeat-purchase reasons. |
+
+Additional synthetic-only example files are in `examples/`.
+
+## Current Status
+
+Phase 6 is complete after this portfolio packaging commit. The repository now includes a polished README, safe synthetic examples, interview-defense notes, LinkedIn-ready project assets, and portfolio positioning materials.
+
+## Data Policy
+
+Raw external datasets and processed real datasets are not redistributed in this repository. Generated artifacts from real data are ignored by default, including local review samples, embeddings, theme outputs, statistical signal outputs, and generated insight reports.
+
+Secrets and API keys must never be committed. The default LLM workflow uses a deterministic local mock provider and does not require an external API call. Tracked examples are synthetic only and are clearly labeled as synthetic.
 
 ## Scope and Limitations
 
-This is an early-stage portfolio project and demonstration framework. It is not
-a production SaaS product, not a company-specific analysis, and not evidence of
-real-world business conclusions for any named company. Results produced in later
-phases should be treated as exploratory unless the methodology and data support
-stronger claims.
+This is a portfolio project, not production SaaS. The statistical layer is exploratory, not causal. Theme discovery and rating association are useful for prioritization, but they should not be treated as confirmatory proof.
+
+The LLM provider is mock by default. A live API integration would require environment variables, secret handling, provider-specific review, and additional validation. A real deployment would also require data governance, monitoring, evaluation, quality review, privacy review, and stakeholder sign-off.
+
+This repository does not claim that findings represent Amazon, any company, or any real business conclusion.
+
+## How to Talk About This Project
+
+One-sentence version:
+
+I built an embedding-first customer feedback analytics pipeline that discovers review themes, quantifies exploratory rating signals, and drafts evidence-backed insight reports with a mock-default LLM layer.
+
+中文翻译：
+
+我建立了一个以语义嵌入为核心的客户反馈分析流程，可以发现评论主题、量化探索性的评分信号，并用默认的模拟 LLM 层生成有证据支撑的洞察报告。
+
+Three-sentence version:
+
+This project turns unstructured product reviews into candidate customer themes using sentence embeddings, UMAP, and HDBSCAN. It adds explainability through representative reviews and TF-IDF keywords, then quantifies prevalence, rating association, effect size, uncertainty, and FDR-adjusted exploratory signals. The final layer uses a deterministic mock LLM provider to label and summarize evidence-backed clusters without making live API calls or unsupported business claims.
+
+中文翻译：
+
+这个项目使用句向量、UMAP 和 HDBSCAN，把非结构化产品评论转成候选客户主题。它通过代表性评论和 TF-IDF 关键词提供可解释性，并量化主题占比、评分关联、效果量、不确定性以及经过 FDR 校正的探索性信号。最后一层使用确定性的模拟 LLM 提供者，对有证据支撑的聚类进行命名和总结，不调用真实 API，也不做没有依据的商业结论。
+
+Interview version:
+
+I designed this as an analytics engineering project rather than a simple LLM wrapper. The pipeline validates local review data, cleans text conservatively, embeds review text with a local sentence-transformer model, uses UMAP + HDBSCAN to discover candidate semantic themes, and represents each theme with review examples and TF-IDF keywords. After discovery, it computes exploratory prevalence and rating-association signals with effect sizes, confidence intervals, and FDR correction, then passes only structured evidence into a mock-default LLM labeling layer. That separation lets me explain what the model discovered, what the statistics suggest, what the LLM summarized, and where the limitations remain.
+
+中文翻译：
+
+我把这个项目设计成一个分析工程项目，而不是简单的 LLM 包装器。整个流程会验证本地评论数据，保守地清洗文本，用本地句向量模型生成语义嵌入，再用 UMAP + HDBSCAN 发现候选语义主题，并用代表性评论和 TF-IDF 关键词解释每个主题。主题发现之后，系统会计算探索性的主题占比和评分关联信号，包括效果量、置信区间和 FDR 校正，然后只把结构化证据传给默认的模拟 LLM 命名层。这样的分层让我可以清楚说明哪些内容来自模型发现，哪些来自统计信号，哪些只是 LLM 的总结，以及项目仍有哪些限制。

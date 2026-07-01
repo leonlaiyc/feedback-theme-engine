@@ -36,3 +36,10 @@ and statistically informed.
 - Not a production SaaS product.
 - Not a company-specific analysis.
 - Not evidence of real business conclusions about Amazon or any other company.
+
+## Portfolio Review Notes
+
+Recruiters should be able to understand the project from the README, synthetic
+examples, and portfolio summary. Technical interviewers should be able to trace
+the methodology from ingestion through embeddings, clustering, statistical
+signals, and evidence-bounded LLM labeling.

@@ -21,6 +21,9 @@ The portfolio goal is to demonstrate applied analytics engineering, customer
 analytics thinking, semantic NLP methods, statistical signal interpretation, and
 responsible LLM usage in one coherent project.
 
+Phase 6 packages that work for recruiter review and technical interview defense
+through polished documentation, synthetic examples, and public-profile assets.
+
 ## Inputs and Outputs
 
 Planned inputs:
@@ -78,6 +81,7 @@ Planned outputs:
 - Statistical claims are framed with appropriate uncertainty and limitations.
 - Theme-rating signals are treated as exploratory prioritization, not causal or
   confirmatory proof.
+- Portfolio examples are synthetic only and clearly labeled.
 
 ## Interview Defend Points
 

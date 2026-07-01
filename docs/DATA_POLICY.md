@@ -15,6 +15,7 @@ This repository must keep data handling conservative and explicit.
 - Toy samples.
 - Schema examples.
 - Small synthetic fixtures for tests.
+- Small synthetic portfolio examples that are clearly labeled as synthetic.
 - Derived summary outputs only when license-safe, small, and explicitly approved.
 
 ## Processed Data
@@ -98,6 +99,14 @@ environment variables, and must never hard-code or commit API keys.
 LLM-assisted outputs are draft labels and summaries grounded in supplied
 evidence. They should not be described as facts without evidence, causal impact,
 or company-specific conclusions.
+
+## Synthetic Portfolio Examples
+
+The `examples/` directory may contain small synthetic tables and reports that
+demonstrate output shape. These files must remain clearly labeled as synthetic
+and must not include real Amazon review text, real processed data, embeddings,
+generated real-data signals, generated real-data LLM reports, or company-specific
+business claims.
 
 ## Review Before Commit
 

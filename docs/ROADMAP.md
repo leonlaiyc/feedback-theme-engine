@@ -184,23 +184,28 @@ Exit criteria:
 
 ## Phase 6: Portfolio Packaging
 
-Status: next.
+Status: complete.
 
 Goal: Package the project for recruiter and hiring-manager review.
 
 Deliverables:
 
 - Polished README.
-- Example report from toy or approved data.
-- Architecture diagram.
-- Methodology notes and limitations.
-- Reproducible demo path.
+- Synthetic-only example signal table and insight report.
+- Interview defense notes.
+- LinkedIn project assets.
+- Portfolio summary.
+- Reproducible CLI workflow documentation.
+- Data and git hygiene audit.
 
 Interview defendable:
 
 - End-to-end story from data to decision-ready insight.
 - Tradeoffs, limitations, and next steps.
+- Clear explanation of why this is not a simple LLM wrapper.
 
 Exit criteria:
 
 - Portfolio presentation is coherent, honest, and reproducible.
+- README, docs, and examples are clearly labeled and recruiter-readable.
+- Synthetic examples are tracked; real generated data artifacts remain ignored.

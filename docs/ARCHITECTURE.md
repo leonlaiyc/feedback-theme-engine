@@ -1,6 +1,6 @@
 # Architecture
 
-## Planned Pipeline
+## Pipeline
 
 ```text
 Raw reviews
@@ -71,10 +71,10 @@ as ignored local artifacts under `data/processed/embeddings/`.
 Embeddings support later semantic clustering and diagnostics. They do not
 produce business conclusions by themselves.
 
-### Dimensionality Reduction
+### UMAP Dimensionality Reduction
 
-UMAP is planned to project high-dimensional embeddings into a lower-dimensional
-space that is more suitable for density-based clustering and diagnostics.
+UMAP projects high-dimensional embeddings into a lower-dimensional space that is
+more suitable for density-based clustering and diagnostics.
 
 Phase 3 applies UMAP to local sentence embeddings before clustering. The reduced
 coordinates are intermediate local artifacts and should not be treated as
@@ -82,9 +82,8 @@ business findings by themselves.
 
 ### HDBSCAN Clustering
 
-HDBSCAN is planned to discover dense semantic groups without requiring a fixed
-number of clusters. It can also identify noise points that do not fit a strong
-theme.
+HDBSCAN discovers dense semantic groups without requiring a fixed number of
+clusters. It can also identify noise points that do not fit a strong theme.
 
 Phase 3 uses HDBSCAN labels as initial candidate theme IDs. Label `-1` is kept
 as noise or outlier reviews and excluded from representative-review and keyword
@@ -118,9 +117,9 @@ themes on one split and validate associations on a holdout split.
 
 ### LLM Labeling
 
-LLMs are planned for cluster labels, concise summaries, and business-readable
-insight generation. They should operate on curated cluster evidence and should
-not replace embedding-based discovery or statistical analysis.
+LLMs are used for cluster labels, concise summaries, and business-readable
+insight generation. They operate on curated cluster evidence and do not replace
+embedding-based discovery or statistical analysis.
 
 Phase 5 implements an evidence-bounded labeling and insight drafting layer. The
 default provider is a deterministic mock, so the workflow is reproducible and
@@ -150,3 +149,9 @@ unless explicitly approved for safe publication.
   uncertainty for exploratory prioritization.
 - LLM role: improve readability through labeling and summarization from
   supplied evidence only.
+
+## Portfolio Packaging
+
+Phase 6 adds recruiter-readable packaging around the existing pipeline. The
+tracked examples under `examples/` are synthetic only and demonstrate report
+shape, not real review findings.
