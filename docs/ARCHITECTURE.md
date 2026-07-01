@@ -122,12 +122,23 @@ LLMs are planned for cluster labels, concise summaries, and business-readable
 insight generation. They should operate on curated cluster evidence and should
 not replace embedding-based discovery or statistical analysis.
 
-Not implemented in Phase 4.
+Phase 5 implements an evidence-bounded labeling and insight drafting layer. The
+default provider is a deterministic mock, so the workflow is reproducible and
+does not require external API keys.
+
+The labeling prompt includes only cluster IDs, TF-IDF keywords, representative
+review snippets, prevalence, uncertainty, rating gap, adjusted p-value,
+interpretation labels, and caution flags. The prompt explicitly instructs the
+model not to invent evidence, claim causality, or override statistical results.
 
 ### Evidence-Backed Insight Report
 
 Final outputs should connect each insight to source review examples, theme
 statistics, and documented limitations.
+
+Phase 5 renders draft JSON and Markdown insight reports from structured evidence
+and validated label outputs. These reports remain local generated artifacts
+unless explicitly approved for safe publication.
 
 ## Method Roles
 
@@ -138,4 +149,4 @@ statistics, and documented limitations.
 - Statistical layer role: quantify prevalence, association, effect size, and
   uncertainty for exploratory prioritization.
 - LLM role: improve readability through labeling and summarization from
-  evidence.
+  supplied evidence only.

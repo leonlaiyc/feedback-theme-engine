@@ -47,12 +47,12 @@ remain traceable to review evidence.
 
 ## Current Status
 
-Phase 4 is complete. The repository includes local-only ingestion, schema
+Phase 5 is complete. The repository includes local-only ingestion, schema
 normalization, deterministic sampling, local sentence embeddings, and UMAP +
 HDBSCAN candidate theme discovery, plus exploratory statistical signals for
-theme prioritization.
+theme prioritization and mock-default insight drafting.
 
-Phase 5 is next: LLM-assisted labeling and insight generation.
+Phase 6 is next: portfolio packaging.
 
 ## Phase 1 Data Ingestion
 
@@ -176,6 +176,37 @@ Themes are discovered from the same data being analyzed, so these tests are
 post-discovery signals. A stronger future design can discover themes on one
 split and validate associations on a holdout split. Generated signal outputs are
 ignored local artifacts and must not be committed.
+
+## Phase 5 Insight Drafting
+
+Phase 5 uses LLM-style prompts for theme labeling and business-readable insight
+drafts. The default provider is a deterministic local mock, so tests and local
+development require no paid API, external key, or network call.
+
+The LLM layer receives only structured evidence:
+
+- Cluster ID.
+- TF-IDF keywords.
+- Representative review snippets.
+- Prevalence and Wilson confidence interval.
+- Rating gap, adjusted p-value, interpretation label, and caution flags.
+
+LLM outputs are labels and draft explanations only. They do not create clusters,
+override statistical signals, invent evidence, or make causal claims.
+
+To draft local insights from Phase 3 and Phase 4 artifacts:
+
+```powershell
+py -3 scripts/label_theme_insights.py `
+  --signals-input data/processed/themes/theme_signals.csv `
+  --representatives-input data/processed/themes/representative_reviews.csv `
+  --keywords-input data/processed/themes/cluster_keywords.csv `
+  --output-dir data/processed/themes `
+  --provider mock
+```
+
+Generated insight reports are ignored local artifacts and must not be committed
+unless explicitly approved and safe.
 
 ## Data Policy Summary
 

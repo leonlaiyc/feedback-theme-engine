@@ -153,30 +153,38 @@ Exit criteria:
 
 ## Phase 5: LLM-Assisted Labeling and Insight Generation
 
-Status: next.
+Status: complete.
 
 Goal: Use LLMs to label clusters and generate readable insights while preserving
 evidence traceability.
 
 Deliverables:
 
-- Prompt templates.
-- Cluster labeling workflow.
-- Source-evidence citation format.
-- Business-readable insight report generator.
+- Evidence-bounded prompt builder.
+- Deterministic mock labeling provider for offline development and tests.
+- Safe JSON response parser and validation.
+- Theme insight record builder.
+- Markdown insight report renderer with exploratory caveat.
+- CLI script for local-only insight drafts.
 
 Interview defendable:
 
 - Why LLMs are not used as the primary clustering mechanism.
 - How hallucination risk is reduced.
 - How every insight links back to examples.
+- Why statistical signals are computed before LLM labeling.
+- Why live API integration must be optional and secret-safe.
 
 Exit criteria:
 
 - Labels and summaries are generated from cluster evidence.
 - No paid API call is required by default.
+- Generated insight outputs are ignored local artifacts.
+- Phase 5 does not implement live OpenAI or Claude calls.
 
 ## Phase 6: Portfolio Packaging
+
+Status: next.
 
 Goal: Package the project for recruiter and hiring-manager review.
 

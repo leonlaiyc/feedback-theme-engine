@@ -7,6 +7,8 @@ __all__ = [
     "data_validation",
     "embeddings",
     "effect_sizes",
+    "insight_reporting",
+    "llm_labeling",
     "sampling",
     "statistical_signals",
     "theme_discovery",

@@ -41,7 +41,7 @@ Planned outputs:
 - Theme-level keyword and example evidence.
 - Theme prevalence, uncertainty, rating association, effect size, and
   multiple-testing-adjusted signal statistics.
-- LLM-assisted theme labels and summaries.
+- Evidence-grounded LLM-assisted theme labels and summaries.
 - Evidence-backed insight report.
 
 ## Core Methodology
@@ -54,8 +54,8 @@ Planned outputs:
 6. Represent themes with keywords, examples, and source evidence.
 7. Quantify theme prevalence, rating association, effect size, uncertainty, and
    multiple-testing-adjusted exploratory signals.
-8. Use LLMs only for cluster labeling, theme summaries, and readable insight
-   generation.
+8. Use LLMs only for evidence-grounded cluster labels, theme summaries, and
+   readable insight generation.
 9. Keep final insights traceable to source reviews.
 
 ## Non-Goals
@@ -66,6 +66,8 @@ Planned outputs:
 - Replacing semantic clustering with simple keyword matching.
 - Committing raw datasets or real processed data.
 - Running paid APIs during Phase 0.
+- Using LLMs to create clusters or override statistical signals.
+- Treating LLM-generated labels as facts without supporting evidence.
 
 ## Success Criteria
 
@@ -87,3 +89,4 @@ Planned outputs:
 - How uncertainty and exploratory limitations are communicated.
 - Why LLMs are restricted to labeling and summarization rather than replacing
   the pipeline.
+- How mock-default LLM labeling supports reproducible testing without secrets.

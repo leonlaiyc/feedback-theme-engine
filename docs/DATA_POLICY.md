@@ -84,6 +84,21 @@ external API keys, LLM labeling, or LLM summarization.
 Statistical outputs are exploratory. They should not be described as causal
 impact, confirmatory proof, or real company conclusions.
 
+## Insight Report Artifacts
+
+Phase 5 generates local theme insight files such as `theme_insights.json` and
+`theme_insights.md`. These files may contain review-derived snippets, labels,
+and draft recommendations, so they must not be committed unless explicitly
+approved and safe.
+
+The default provider is `mock` and does not call any external API. Future live
+API integrations must be optional, disabled by default, configured only through
+environment variables, and must never hard-code or commit API keys.
+
+LLM-assisted outputs are draft labels and summaries grounded in supplied
+evidence. They should not be described as facts without evidence, causal impact,
+or company-specific conclusions.
+
 ## Review Before Commit
 
 Before committing, check git status and staged files for data or secrets. If
